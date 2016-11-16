@@ -26,33 +26,39 @@ command! -range RDChar call diffchar#ResetDiffChar(range(<line1>, <line2>))
 command! -range TDChar call diffchar#ToggleDiffChar(range(<line1>, <line2>))
 
 " Configurable Keymaps
-noremap <silent> <Plug>ToggleDiffCharAllLines :%TDChar<CR>
-noremap <silent> <Plug>ToggleDiffCharCurrentLine :TDChar<CR>
-nnoremap <silent> <Plug>JumpDiffCharPrevStart
-				\ :call diffchar#JumpDiffChar(0, 0)<CR>
-nnoremap <silent> <Plug>JumpDiffCharNextStart
-				\ :call diffchar#JumpDiffChar(1, 0)<CR>
-nnoremap <silent> <Plug>JumpDiffCharPrevEnd
-				\ :call diffchar#JumpDiffChar(0, 1)<CR>
-nnoremap <silent> <Plug>JumpDiffCharNextEnd
-				\ :call diffchar#JumpDiffChar(1, 1)<CR>
-if !hasmapto('<Plug>ToggleDiffCharAllLines', 'nv')
-	map <silent> <F7> <Plug>ToggleDiffCharAllLines
+if !exists('g:DiffChar_default_mapping')
+    let g:DiffChar_default_mapping = 1
 endif
-if !hasmapto('<Plug>ToggleDiffCharCurrentLine', 'nv')
-	map <silent> <F8> <Plug>ToggleDiffCharCurrentLine
-endif
-if !hasmapto('<Plug>JumpDiffCharPrevStart', 'n')
-	nmap <silent> [b <Plug>JumpDiffCharPrevStart
-endif
-if !hasmapto('<Plug>JumpDiffCharNextStart', 'n')
-	nmap <silent> ]b <Plug>JumpDiffCharNextStart
-endif
-if !hasmapto('<Plug>JumpDiffCharPrevEnd', 'n')
-	nmap <silent> [e <Plug>JumpDiffCharPrevEnd
-endif
-if !hasmapto('<Plug>JumpDiffCharNextEnd', 'n')
-	nmap <silent> ]e <Plug>JumpDiffCharNextEnd
+
+if g:DiffChar_default_mapping != 0
+    noremap <silent> <Plug>ToggleDiffCharAllLines :%TDChar<CR>
+    noremap <silent> <Plug>ToggleDiffCharCurrentLine :TDChar<CR>
+    nnoremap <silent> <Plug>JumpDiffCharPrevStart
+                                    \ :call diffchar#JumpDiffChar(0, 0)<CR>
+    nnoremap <silent> <Plug>JumpDiffCharNextStart
+                                    \ :call diffchar#JumpDiffChar(1, 0)<CR>
+    nnoremap <silent> <Plug>JumpDiffCharPrevEnd
+                                    \ :call diffchar#JumpDiffChar(0, 1)<CR>
+    nnoremap <silent> <Plug>JumpDiffCharNextEnd
+                                    \ :call diffchar#JumpDiffChar(1, 1)<CR>
+    if !hasmapto('<Plug>ToggleDiffCharAllLines', 'nv')
+            map <silent> <F7> <Plug>ToggleDiffCharAllLines
+    endif
+    if !hasmapto('<Plug>ToggleDiffCharCurrentLine', 'nv')
+            map <silent> <F8> <Plug>ToggleDiffCharCurrentLine
+    endif
+    if !hasmapto('<Plug>JumpDiffCharPrevStart', 'n')
+            nmap <silent> [b <Plug>JumpDiffCharPrevStart
+    endif
+    if !hasmapto('<Plug>JumpDiffCharNextStart', 'n')
+            nmap <silent> ]b <Plug>JumpDiffCharNextStart
+    endif
+    if !hasmapto('<Plug>JumpDiffCharPrevEnd', 'n')
+            nmap <silent> [e <Plug>JumpDiffCharPrevEnd
+    endif
+    if !hasmapto('<Plug>JumpDiffCharNextEnd', 'n')
+            nmap <silent> ]e <Plug>JumpDiffCharNextEnd
+    endif
 endif
 
 " Set a difference unit type
